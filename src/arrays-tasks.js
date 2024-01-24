@@ -383,8 +383,12 @@ function generateOdds(len) {
  *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
-function getElementByIndices(/* arr, indices */) {
-  throw new Error('Not implemented');
+function getElementByIndices(arr, indices) {
+  if (indices.length !== 1) {
+    const i = indices.shift();
+    return getElementByIndices(arr[i], indices);
+  }
+  return arr[indices[0]];
 }
 
 /**
@@ -439,8 +443,11 @@ function getIdentityMatrix(n) {
  *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
-function getIndicesOfOddNumbers(/* numbers */) {
-  throw new Error('Not implemented');
+function getIndicesOfOddNumbers(numbers) {
+  return numbers.reduce((acc, el, i) => {
+    if (el % 2 !== 0) return [...acc, i];
+    return [...acc];
+  }, []);
 }
 
 /**
@@ -453,8 +460,12 @@ function getIndicesOfOddNumbers(/* numbers */) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  if (arr.length === 0) return arr;
+  const toHex = (color) =>
+    `#${color.toString(16).padStart(6, '0').toUpperCase()}`;
+
+  return [toHex(arr[0]), toHex(arr[1]), toHex(arr[2])];
 }
 
 /**
@@ -471,8 +482,12 @@ function getHexRGBValues(/* arr */) {
  *   getMaxItems([ 10, 2, 7, 5, 3, -5 ], 3) => [ 10, 7, 5 ]
  *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
  */
-function getMaxItems(/* arr, n */) {
-  throw new Error('Not implemented');
+function getMaxItems(arr, n) {
+  if (arr.length <= 1) return arr;
+  return arr
+    .sort((a, b) => a - b)
+    .slice(-n)
+    .reverse();
 }
 
 /**
