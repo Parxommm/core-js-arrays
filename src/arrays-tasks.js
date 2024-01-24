@@ -453,10 +453,9 @@ function getFalsyValuesCount(arr) {
  *                              [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  const arr = new Array(n).fill(new Array(n).fill(0)).map((item, i) => {
-    return item.toSpliced(i, 1, 1);
+  return new Array(n).fill(new Array(n).fill(0)).map((innerArr, i1) => {
+    return innerArr.map((el, i2) => (i2 === i1 ? 1 : el));
   });
-  return arr;
 }
 
 /**
